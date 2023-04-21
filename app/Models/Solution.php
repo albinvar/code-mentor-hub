@@ -11,6 +11,9 @@ class Solution extends Model
 
     protected $fillable = [
         'user_id',
+        'question_id',
         'body',
     ];
+
+
 }
