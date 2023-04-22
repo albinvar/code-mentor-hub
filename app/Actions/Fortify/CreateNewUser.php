@@ -21,11 +21,20 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        $tags = json_decode($input['tags'], true);
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ])->validate();
+
+        Validator::make($tags, [
+            '*' => 'sometimes|string|max:30',
+        ], [
+            '*.string' => 'Invalid tag value :input must be a string.',
+            '*.max' => 'Invalid tag value: :input . Maximum value allowed is :max.',
         ])->validate();
 
         return DB::transaction(function () use ($input) {
