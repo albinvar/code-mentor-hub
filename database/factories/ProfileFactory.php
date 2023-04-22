@@ -24,7 +24,6 @@ class ProfileFactory extends Factory
             },
             'bio' => $this->faker->sentence(),
             'location' => $this->faker->city(),
-            'avatar' => $this->faker->imageUrl(),
             'website' => $this->faker->url(),
         ];
     }
