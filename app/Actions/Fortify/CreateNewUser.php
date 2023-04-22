@@ -25,6 +25,7 @@ class CreateNewUser implements CreatesNewUsers
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
@@ -48,7 +49,7 @@ class CreateNewUser implements CreatesNewUsers
             $profile = new Profile([
                 'user_id' => $user->id,
                 'bio' => 'This is my bio',
-                'location' => 'New York',
+                'location' => $input['location'],
             ]);
 
             $profile->save();
