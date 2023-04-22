@@ -11,6 +11,8 @@ class Profile extends Model
 {
     use HasFactory, HasTags;
 
+    protected string $tagTable = 'profile_tags';
+
     protected  $fillable = [
         'bio',
         'location',

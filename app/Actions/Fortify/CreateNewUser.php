@@ -37,7 +37,7 @@ class CreateNewUser implements CreatesNewUsers
             '*.max' => 'Invalid tag value: :input . Maximum value allowed is :max.',
         ])->validate();
 
-        return DB::transaction(function () use ($input) {
+        return DB::transaction(function () use ($input, $tags) {
             $user = new User([
                 'name' => $input['name'],
                 'email' => $input['email'],
@@ -54,6 +54,8 @@ class CreateNewUser implements CreatesNewUsers
             $profile->save();
 
             $user->assignRole('User');
+
+            $profile->attachTags($tags);
 
             return $user;
         });
