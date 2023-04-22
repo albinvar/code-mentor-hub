@@ -44,6 +44,8 @@ class CreateNewUser implements CreatesNewUsers
 
             $profile->save();
 
+            $user->assignRole('User');
+
             return $user;
         });
     }
