@@ -3,7 +3,6 @@
         <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">{{ $question->title }}</h2>
         <div class="text-gray-700 dark:text-gray-100 mb-4 ">
             {!! $question->body !!}
-            {{ $question->body }}
         </div>
         <div class="flex justify-between items-center">
             <div class="flex items-center">
