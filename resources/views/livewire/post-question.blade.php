@@ -27,10 +27,11 @@
         </div>
 
         <div class="mt-4" x-data="{ tags: [], newTag: '' }" x-init="() => {
-    @if (old('tags'))
-        tags.push(...JSON.parse('{{ json_encode(old("tags")) }}'))
-    @endif
-}">
+            @if ($errors->any())
+                tags = []
+                tags.push(...JSON.parse('{{ json_encode($tags) }}'))
+            @endif
+        }">
             <x-label for="tags" value="{{ __('Related Tags') }}" />
             <div class="my-3 flex flex-wrap items-center gap-2" x-cloak>
                 <template x-for="(tag, index) in tags" :key="index">
