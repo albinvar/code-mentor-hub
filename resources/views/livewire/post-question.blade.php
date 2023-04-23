@@ -37,11 +37,11 @@
                 <template x-for="(tag, index) in tags" :key="index">
                     <div class="px-2 py-1 bg-gray-200 rounded-lg dark:bg-gray-700 transition-opacity duration-900 opacity-100 hover:opacity-75">
                         <span x-text="tag"></span>
-                        <button type="button" class="ml-2 text-red-500 hover:text-red-700 focus:outline-none" @click.prevent="tags.splice(index, 1)">
+                        <button type="button" class="ml-2 text-red-500 hover:text-red-700 focus:outline-none" @click.prevent="
+        tags.splice(index, 1);
+        $wire.removeTag(tag)">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                      d="M11.414 10l4.293-4.293a1 1 0 10-1.414-1.414L10 8.586 5.707 4.293a1 1 0 10-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 001.414 1.414L10 11.414l4.293 4.293a1 1 0 001.414-1.414L11.414 10z"
-                                      clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M11.414 10l4.293-4.293a1 1 0 10-1.414-1.414L10 8.586 5.707 4.293a1 1 0 10-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 001.414 1.414L10 11.414l4.293 4.293a1 1 0 001.414-1.414L11.414 10z" clip-rule="evenodd" />
                             </svg>
                         </button>
                     </div>
@@ -118,4 +118,11 @@
             });
         </script>
 
+    @section('scripts')
+        <script>
+            Livewire.on('tagsUpdated', tags => {
+                window.tags = tags;
+            });
+        </script>
+    @endsection
 </x-authentication-card>

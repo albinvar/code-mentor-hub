@@ -12,7 +12,7 @@ class PostQuestion extends Component
 
     public $title;
 
-    public array $tags;
+    public array $tags = [];
 
     public function rules()
     {
@@ -24,6 +24,19 @@ class PostQuestion extends Component
         ];
     }
 
+    public function addTag($tags)
+    {
+        $this->tags = $tags;
+        $this->emit('tagsUpdated', $this->tags);
+    }
+
+    public function removeTag($tag)
+    {
+        $this->tags = array_values(array_filter($this->tags, function ($t) use ($tag) {
+            return $t != $tag;
+        }));
+        $this->emit('tagsUpdated', $this->tags);
+    }
     public function render()
     {
         return view('livewire.post-question');
