@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -24,7 +23,6 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'promote-to-mentor']);
         Permission::create(['name' => 'demote-to-mentor']);
-
 
         $userRole = Role::create(['name' => 'User']);
         $mentorRole = Role::create(['name' => 'Mentor']);

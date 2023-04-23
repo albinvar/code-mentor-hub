@@ -13,7 +13,7 @@ class Profile extends Model
 
     protected string $tagTable = 'profile_tags';
 
-    protected  $fillable = [
+    protected $fillable = [
         'bio',
         'location',
         'website',

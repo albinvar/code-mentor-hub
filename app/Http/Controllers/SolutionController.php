@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Solution;
 use App\Http\Requests\StoreSolutionRequest;
 use App\Http\Requests\UpdateSolutionRequest;
+use App\Models\Solution;
 
 class SolutionController extends Controller
 {
