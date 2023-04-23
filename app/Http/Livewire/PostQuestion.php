@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Rules\QuillEditorRequired;
 use Livewire\Component;
 
 class PostQuestion extends Component
@@ -17,7 +18,7 @@ class PostQuestion extends Component
     {
         return [
             'title' => 'required|string|max:50|min:5',
-            'question' => 'required|string|min:10|max:5000',
+            'question' =>  [new QuillEditorRequired, 'required', 'string', 'min:10', 'max:5000'],
             'tags' => 'required|array|min:1',
             'tags.*' => 'required|string|max:255',
         ];

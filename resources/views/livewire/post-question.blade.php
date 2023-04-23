@@ -22,7 +22,7 @@
         <div class="mt-4" wire:ignore>
             <x-label for="location" value="{{ __('Explain your question here ') }}" class="mb-4" />
             <div id="question" wire:model="question" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                Please provide your problem here.
+                @if(! empty($question)) {!! $question !!} @endif
             </div>
         </div>
 
@@ -59,10 +59,7 @@
             @this.set('tags', tags);
         }" placeholder="Add tags (comma, space, or enter separated)">
             </div>
-            <input type="hidden" :value="JSON.stringify(tags)">
         </div>
-
-        {{ collect($tags)->toJson() }}
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
             <div class="mt-4">
