@@ -10,6 +10,14 @@
         <link href="https://highlight.js/monokai-sublime.min.css" rel="stylesheet">
 
     <x-validation-errors class="mb-4" />
+    @if ($errors->has('createQuestion'))
+        <p class="text-red-500">{{ $errors->first('createQuestion') }}</p>
+    @endif
+    @if (session()->has('success'))
+        <div class="bg-green-200 p-4 rounded-md mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <form method="POST" wire:submit.prevent="submit" enctype="multipart/form-data">
         @csrf
