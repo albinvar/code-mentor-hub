@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,9 @@ Route::middleware([
     Route::get('/community', function () {
         return view('community');
     })->name('community');
+
+    Route::get('/questions/{question:slug}', function (Question $question) {
+        return view('questions.show', compact('question'));
+    })->name('question.show');
+
 });

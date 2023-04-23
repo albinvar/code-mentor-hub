@@ -1,6 +1,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     @forelse ($questions as $question)
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 m-4">
+
+        <a href="{{ route('question.show', ['question' => $question->slug]) }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 m-4">
             <h2 class="text-2xl dark:text-gray-100 text-gray-700 font-bold mb-4">{{ $question->title }}</h2>
             <p class="text-gray-600 dark:text-gray-400 mb-4">{!! \Illuminate\Support\Str::limit(strip_tags($question->body), 200) !!}.....</p>
             <div class="flex justify-between items-center">
@@ -20,8 +21,7 @@
                     <p class="text-gray-500 dark:text-gray-400 ml-2">{{ $question->created_at->diffForHumans() }}</p>
                 </div>
             </div>
-
-        </div>
+        </a>
 
     @empty
         <div class="text-2xl text-center dark:text-gray-100">
