@@ -14,8 +14,7 @@ class QuillEditorRequired implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (empty(strip_tags($value)))
-        {
+        if (empty(strip_tags($value))) {
             $fail('The :attribute field is required.');
         }
     }

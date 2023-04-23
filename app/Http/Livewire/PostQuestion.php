@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class PostQuestion extends Component
 {
-
     public $question;
 
     public $title;
@@ -20,7 +19,7 @@ class PostQuestion extends Component
     {
         return [
             'title' => 'required|string|max:50|min:5',
-            'question' =>  [new QuillEditorRequired, 'required', 'string', 'min:10', 'max:5000'],
+            'question' => [new QuillEditorRequired, 'required', 'string', 'min:10', 'max:5000'],
             'tags' => 'required|array|min:1',
             'tags.*' => 'required|string|max:255',
         ];
@@ -39,6 +38,7 @@ class PostQuestion extends Component
         }));
         $this->emit('tagsUpdated', $this->tags);
     }
+
     public function render()
     {
         return view('livewire.post-question');

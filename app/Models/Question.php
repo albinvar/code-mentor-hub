@@ -27,7 +27,6 @@ class Question extends Model
         Question::observe(QuestionObserver::class);
     }
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -37,5 +36,4 @@ class Question extends Model
     {
         return $this->hasMany(Solution::class);
     }
-
 }
