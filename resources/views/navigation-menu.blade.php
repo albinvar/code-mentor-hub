@@ -23,6 +23,11 @@
                         </x-nav-link>
                     </div>
                 @endif
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('ask') }}" :active="request()->routeIs('ask')">
+                        {{ __('Ask Question to Community') }}
+                    </x-nav-link>
+                </div>
                 @if(auth()->user()->hasRole('Admin'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
