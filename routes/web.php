@@ -33,4 +33,8 @@ Route::middleware([
     Route::get('/ask', function () {
         return view('post-question');
     })->name('ask');
+
+    Route::get('/community', function () {
+        return view('community');
+    })->name('community');
 });
