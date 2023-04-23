@@ -3,6 +3,12 @@
 
     </x-slot>
 
+        <!-- Include stylesheet -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <link href="https://highlight.js/monokai-sublime.min.css" rel="stylesheet">
+
     <x-validation-errors class="mb-4" />
 
     <form method="POST" wire:submit.prevent="submit" enctype="multipart/form-data">
@@ -13,10 +19,11 @@
             <x-input id="title" class="block mt-1 w-full" type="text" wire:model.lazy="title" required autofocus autocomplete="title" />
         </div>
 
-        <div class="mt-4">
-            <x-label for="location" value="{{ __('Matter') }}" />
-            <textarea id="location" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="text" name="location" :value="old('location')" required autofocus autocomplete="location">Hey</textarea>
+        <div class="mt-4" wire:ignore>
+            <x-label for="location" value="{{ __('Explain your question here ') }}" class="mb-4" />
+            <div id="question" wire:model="question" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"></div>
         </div>
+
 
         <div class="mt-4" x-data="{ tags: [], newTag: '' }" x-init="() => {
                 @if (old('tags'))
@@ -80,4 +87,34 @@
             </x-button>
         </div>
     </form>
+
+
+        <!-- Include the Quill library -->
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+        <!-- Initialize Quill editor -->
+        <script>
+            hljs.configure({   // optionally configure hljs
+                languages: ['javascript', 'ruby', 'python', 'php']
+            });
+
+            var quill = new Quill('#question', {
+                modules: {
+                    syntax: true,
+                    toolbar: [
+                        [{ header: [1, 2, false] }],
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['code-block', 'link']
+                    ]
+                },
+                placeholder: '.',
+                theme: 'snow'
+            });
+            quill.on('text-change', function(delta, oldDelta, source) {
+                // Sync the Quill editor content with Livewire's data
+            @this.set('question', quill.root.innerHTML);
+            });
+        </script>
+
 </x-authentication-card>
