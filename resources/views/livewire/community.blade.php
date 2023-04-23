@@ -4,6 +4,11 @@
         <a href="{{ route('question.show', ['question' => $question->slug]) }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 m-4">
             <h2 class="text-2xl dark:text-gray-100 text-gray-700 font-bold mb-4">{{ $question->title }}</h2>
             <p class="text-gray-600 dark:text-gray-400 mb-4">{!! \Illuminate\Support\Str::limit(strip_tags($question->body), 200) !!}.....</p>
+            <div class="text-gray-600 dark:text-gray-400 mb-4">
+                @foreach($question->tags->pluck('name') as $tag)
+                    <span class="inline-flex items-center rounded-md bg-blue-500 dark:bg-blue-700 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"> {{ $tag }}</span>
+                @endforeach
+            </div>
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
