@@ -9,25 +9,22 @@ class Community extends Component
 {
     public function render()
     {
-//        $currentUserTags = auth()->user()->profile->tags()->pluck('id');
-//
-//        $questions = Question::whereHas('tags', function($query) use ($currentUserTags) {
-//            $query->whereIn('tags.id', $currentUserTags);
-//        })
-//            ->withCount(['tags' => function ($query) use ($currentUserTags) {
-//                $query->whereIn('tags.id', $currentUserTags);
-//            }])
-//            ->orderByDesc('tags_count')
-//            ->get();
-//
-//        $unmatchedQuestions = Question::whereDoesntHave('tags')
-//            ->orderBy('created_at', 'desc')
-//            ->get();
-//
-//        $questions = $questions->merge($unmatchedQuestions);
+        // user tags
+        $currentUserTags = auth()->user()->profile->tags()->pluck('name');
 
-        $questions = Question::latest()->get();
+        // get matching questions from the db with all tags matching the profile.
+        $matchingQuestions = Question::withAllTags($currentUserTags)->latest()->get();
 
-        return view('livewire.community', ['questions' => $questions]);
+        // get partially matching results wth any tags matching the profile.
+        $partiallyMatchingQuestions = Question::withAnyTags($currentUserTags)->latest()->get();
+
+        // Problems without any matching profiles.
+        $nonMatchingQuestions = Question::latest()->get();
+
+        $mergedQuestions = $matchingQuestions->merge($partiallyMatchingQuestions);
+        $mergedQuestions = $mergedQuestions->merge($nonMatchingQuestions);
+        $uniqueQuestions = $mergedQuestions->unique();
+
+        return view('livewire.community', ['questions' => $uniqueQuestions]);
     }
 }
