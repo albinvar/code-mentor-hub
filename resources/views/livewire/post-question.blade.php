@@ -21,16 +21,17 @@
 
         <div class="mt-4" wire:ignore>
             <x-label for="location" value="{{ __('Explain your question here ') }}" class="mb-4" />
-            <div id="question" wire:model="question" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"></div>
+            <div id="question" wire:model="question" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                Please provide your problem here.
+            </div>
         </div>
 
-
         <div class="mt-4" x-data="{ tags: [], newTag: '' }" x-init="() => {
-                @if (old('tags'))
-                    tags.push(...JSON.parse('{{ json_encode(old("tags")) }}'))
-                @endif
-            }">
-            <x-label for="tags" value="{{ __('Your Interests') }}" />
+    @if (old('tags'))
+        tags.push(...JSON.parse('{{ json_encode(old("tags")) }}'))
+    @endif
+}">
+            <x-label for="tags" value="{{ __('Related Tags') }}" />
             <div class="my-3 flex flex-wrap items-center gap-2" x-cloak>
                 <template x-for="(tag, index) in tags" :key="index">
                     <div class="px-2 py-1 bg-gray-200 rounded-lg dark:bg-gray-700 transition-opacity duration-900 opacity-100 hover:opacity-75">
@@ -46,19 +47,21 @@
                 </template>
 
                 <input type="text" id="tags" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" x-model="newTag" x-on:keydown.enter.prevent="
-            if (newTag.trim()) {
-                let tagsToAdd = newTag.split(/[ ,]+/);
-                tagsToAdd.forEach(tag => {
-                    if (tag.trim() && !tags.includes(tag.trim())) {
-                        tags.push(tag.trim());
-                    }
-                });
-                newTag = '';
-            }" placeholder="Add tags (comma, space, or enter separated)">
+        if (newTag.trim()) {
+            let tagsToAdd = newTag.split(/[ ,]+/);
+            tagsToAdd.forEach(tag => {
+                if (tag.trim() && !tags.includes(tag.trim())) {
+                    tags.push(tag.trim());
+                }
+            });
+            newTag = '';
+            @this.set('tags', tags);
+        }" placeholder="Add tags (comma, space, or enter separated)">
             </div>
-            <input type="hidden" name="tags" :value="JSON.stringify(tags)">
+            <input type="hidden" :value="JSON.stringify(tags)">
         </div>
 
+        {{ collect($tags)->toJson() }}
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
             <div class="mt-4">
