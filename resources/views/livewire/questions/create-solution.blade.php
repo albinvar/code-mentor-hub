@@ -9,11 +9,6 @@
     @if ($errors->has('createSolution'))
         <p class="text-red-500">{{ $errors->first('createSolution') }}</p>
     @endif
-    @if (session()->has('success'))
-        <div class="bg-green-200 p-4 rounded-md mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <form method="POST" wire:submit.prevent="submit" enctype="multipart/form-data">
         @csrf
@@ -44,7 +39,7 @@
 
         <div class="flex items-center justify-end mt-4">
 
-            <x-secondary-button wire:click="toggleSolutionModal()" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="closeSolutionModal()" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-secondary-button>
             <x-button class="ml-4">

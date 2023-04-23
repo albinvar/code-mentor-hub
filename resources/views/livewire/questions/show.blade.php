@@ -14,6 +14,11 @@
             <p class="text-gray-500 dark:text-gray-400">{{ $question->created_at->diffForHumans() }}</p>
         </div>
         <div class="mt-6">
+            @if (session()->has('success'))
+                <div class="my-6 bg-green-200 p-4 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
             <x-button wire:click="$toggle('solutionModal')">Propose Solution</x-button>
         </div>
 

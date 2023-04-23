@@ -13,11 +13,21 @@ class CreateSolution extends Component
 
     public $solution;
 
+    public $question;
+
     public $solutionModal;
 
-    public function toggleSolutionModal()
+    public $message;
+
+    public function openSolutionModal()
     {
-        $this->solutionModal = !$this->solutionModal;
+        $this->solutionModal = true;
+        $this->emit('solutionModalToggled', $this->solutionModal);
+    }
+
+    public function closeSolutionModal()
+    {
+        $this->solutionModal = false;
         $this->emit('solutionModalToggled', $this->solutionModal);
     }
 
@@ -28,8 +38,9 @@ class CreateSolution extends Component
         ];
     }
 
-    public function mount($status)
+    public function mount($question, $status)
     {
+        $this->question = $question;
         $this->solutionModal = $status;
     }
 
@@ -46,14 +57,16 @@ class CreateSolution extends Component
             DB::transaction(function () use ($data) {
                 $question = Solution::create([
                     'user_id' => auth()->id(),
+                    'question_id' => $this->question->id,
                     'body' => $data['solution'],
                 ]);
 
                 // Success message
-                session()->flash('success', 'Solution created successfully!');
-
+                $this->message = 'Solution created successfully!';
+                $this->emitUp('flashMessage', $this->message);
                 // Reset form fields
-                $this->reset();
+                $this->solution = false;
+                $this->closeSolutionModal();
             });
         } catch (\Exception $e) {
             // handle the exception here

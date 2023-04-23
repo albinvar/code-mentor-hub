@@ -12,7 +12,13 @@ class Show extends Component
 
     protected $listeners = [
         'solutionModalToggled' => 'updateSolutionModalState',
+        'flashMessage' => 'setFlashMessage'
     ];
+
+    public function setFlashMessage($message)
+    {
+        session()->flash('success', $message);
+    }
 
     public function updateSolutionModalState($solutionModal)
     {
