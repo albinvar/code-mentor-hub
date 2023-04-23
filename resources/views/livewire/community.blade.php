@@ -6,7 +6,7 @@
             <p class="text-gray-600 dark:text-gray-400 mb-4">{!! \Illuminate\Support\Str::limit(strip_tags($question->body), 200) !!}.....</p>
             <div class="text-gray-600 dark:text-gray-400 mb-4">
                 @foreach($question->tags->pluck('name') as $tag)
-                    <span class="inline-flex items-center rounded-md bg-blue-500 dark:bg-blue-700 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"> {{ $tag }}</span>
+                    <span class="inline-flex items-center rounded-md bg-blue-100 dark:bg-blue-200 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"> {{ $tag }}</span>
                 @endforeach
             </div>
             <div class="flex justify-between items-center">
