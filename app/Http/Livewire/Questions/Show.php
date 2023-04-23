@@ -8,6 +8,17 @@ class Show extends Component
 {
     public $question;
 
+    public bool $solutionModal = false;
+
+    protected $listeners = [
+        'solutionModalToggled' => 'updateSolutionModalState',
+    ];
+
+    public function updateSolutionModalState($solutionModal)
+    {
+        $this->solutionModal = $solutionModal;
+    }
+
     public function mount($question)
     {
         $this->question = $question;

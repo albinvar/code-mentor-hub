@@ -13,7 +13,25 @@
             </div>
             <p class="text-gray-500 dark:text-gray-400">{{ $question->created_at->diffForHumans() }}</p>
         </div>
+        <div class="mt-6">
+            <x-button wire:click="$toggle('solutionModal')">Propose Solution</x-button>
+        </div>
+
     </div>
+    <x-dialog-modal wire:model="solutionModal">
+        <x-slot name="title">
+            {{ __('Enter details') }}
+        </x-slot>
+
+        <x-slot name="content">
+            <livewire:questions.create-solution :question="$question" :status="$solutionModal"/>
+        </x-slot>
+
+        <x-slot name="footer">
+
+        </x-slot>
+    </x-dialog-modal>
+
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
