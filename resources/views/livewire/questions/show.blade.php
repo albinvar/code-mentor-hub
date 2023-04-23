@@ -1,4 +1,5 @@
-<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+<div>
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden my-4 mx-6 md:mx-2 lg:mx-2">
     <div class="p-6">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">{{ $question->title }}</h2>
         <div class="text-gray-700 dark:text-gray-100 mb-4 ">
@@ -36,6 +37,11 @@
 
         </x-slot>
     </x-dialog-modal>
+    </div>
+
+    <div class="my-8">
+        <livewire:solutions.show :solutions="$question->solutions" />
+    </div>
 
 </div>
 
