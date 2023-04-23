@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Question;
 use App\Rules\QuillEditorRequired;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class PostQuestion extends Component
@@ -44,6 +46,28 @@ class PostQuestion extends Component
 
     public function submit()
     {
-        $this->validate();
+        $data = $this->validate();
+        try {
+            DB::transaction(function () use ($data) {
+                $question = Question::create([
+                    'user_id' => auth()->id(),
+                    'title' => $data['title'],
+                    'body' => $data['question'],
+                ]);
+
+                $question->attachTags($data['tags']);
+
+                // Success message
+                session()->flash('success', 'Question created successfully!');
+
+                // Reset form fields
+                $this->reset();
+            });
+        } catch (\Exception $e) {
+            // handle the exception here
+            // for example, you could redirect the user back to the form with an error message
+            $this->addError('createQuestion', $e->getMessage());
+        }
+
     }
 }
