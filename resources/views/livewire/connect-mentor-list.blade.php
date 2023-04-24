@@ -14,7 +14,7 @@
                 Name
             </th>
             <th scope="col" class="px-6 py-3">
-                Position
+                Expertises
             </th>
             <th scope="col" class="px-6 py-3">
                 Status
@@ -54,7 +54,7 @@
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Connect</a>
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" wire:click="connectMentor({{ $profile->user->id }})">Connect</a>
                 </td>
             </tr>
         @endforeach

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('one_to_one_sessions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('mentor_id')->constrained('users');
+            $table->integer('status');
+            $table->string('url');
             $table->timestamps();
         });
     }
