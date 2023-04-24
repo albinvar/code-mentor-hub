@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OneToOneSessionController;
 use App\Http\Controllers\PaymentController;
 use App\Models\Question;
 use App\Models\User;
@@ -47,4 +48,6 @@ Route::middleware([
 
     Route::get('/payment', [PaymentController::class, 'show'])->name('payment');
     Route::post('/payment', [PaymentController::class, 'verify'])->name('payment.post');
+
+    Route::get('/connect-with-mentors', [OneToOneSessionController::class, 'index'])->name('connect.mentor');
 });

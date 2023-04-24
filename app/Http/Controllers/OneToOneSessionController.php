@@ -13,7 +13,7 @@ class OneToOneSessionController extends Controller
      */
     public function index()
     {
-        //
+        return view('mentors.connect-list');
     }
 
     /**
@@ -35,10 +35,11 @@ class OneToOneSessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OneToOneSession $oneToOneSession)
+    public function show()
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.

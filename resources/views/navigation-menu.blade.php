@@ -28,6 +28,13 @@
                         </x-nav-link>
                     </div>
                 @endif
+                @if(auth()->user()->hasRole('Premium'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('connect.mentor') }}" :active="request()->routeIs('connect.mentor')">
+                            {{ __('Connect With Mentors') }}
+                        </x-nav-link>
+                    </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('ask') }}" :active="request()->routeIs('ask')">
                         {{ __('Ask Question to Community') }}
