@@ -23,7 +23,7 @@
                 </div>
                 @if(! auth()->user()->hasRole('Mentor'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('upgrade') }}" :active="request()->routeIs('upgrade')">
+                        <x-nav-link href="{{ route('payment') }}" :active="request()->routeIs('payment')">
                             {{ __('Upgrade to Mentor') }}
                         </x-nav-link>
                     </div>
