@@ -49,7 +49,7 @@ class Show extends Component
 
         // Check if the user has already voted for this solution
         $vote = Vote::where('user_id', $user->id)
-            ->where('solution_id', $this->solution->id)
+            ->where('solution_id', $solution->id)
             ->first();
 
         if ($vote && $vote->vote_type == 1) {
@@ -62,7 +62,7 @@ class Show extends Component
             // If the user hasn't voted, create a new vote
             Vote::create([
                 'user_id' => $user->id,
-                'solution_id' => $this->solution->id,
+                'solution_id' => $solution->id,
                 'vote_type' => -1,
             ]);
         }
