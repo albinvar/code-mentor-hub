@@ -42,5 +42,4 @@ Route::middleware([
     Route::get('/questions/{question:slug}', function (Question $question) {
         return view('questions.show', compact('question'));
     })->name('question.show');
-
 });
