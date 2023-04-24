@@ -1,0 +1,158 @@
+# Query: logo
+# ContextLines: 1
+
+43 results - 18 files
+
+resources\views\navigation-menu.blade.php:
+    5              <div class="flex">
+    6:                 <!-- Logo -->
+    7                  <div class="shrink-0 flex items-center">
+
+  137                              <!-- Authentication -->
+  138:                             <form method="POST" action="{{ route('logout') }}" x-data>
+  139                                  @csrf
+  140  
+  141:                                 <x-dropdown-link href="{{ route('logout') }}"
+  142                                           @click.prevent="$root.submit();">
+
+  198                  <!-- Authentication -->
+  199:                 <form method="POST" action="{{ route('logout') }}" x-data>
+  200                      @csrf
+  201  
+  202:                     <x-responsive-nav-link href="{{ route('logout') }}"
+  203                                     @click.prevent="$root.submit();">
+
+resources\views\policy.blade.php:
+  4              <div>
+  5:                 <x-authentication-card-logo />
+  6              </div>
+
+resources\views\terms.blade.php:
+  4              <div>
+  5:                 <x-authentication-card-logo />
+  6              </div>
+
+resources\views\auth\confirm-password.blade.php:
+  2      <x-authentication-card>
+  3:         <x-slot name="logo">
+  4:             <x-authentication-card-logo />
+  5          </x-slot>
+
+resources\views\auth\forgot-password.blade.php:
+  2      <x-authentication-card>
+  3:         <x-slot name="logo">
+  4:             <x-authentication-card-logo />
+  5          </x-slot>
+
+resources\views\auth\landingpage.html:
+  11      <nav class = "flex text-gray-500 font-semibold justify-between">
+  12:         <a href="landingpage.html"><img src="logo.png" alt="weblogo" class="px-4"></a>
+  13          <ul class="px-16 py-4 flex space-x-4 justify-end">
+
+resources\views\auth\login.blade.php:
+  126                class="mx-auto h-16 w-16"
+  127:               src="images/app-logo.svg"
+  128:               alt="logo"
+  129              />
+
+resources\views\auth\register.blade.php:
+  3      <x-authentication-card>
+  4:         <x-slot name="logo">
+  5:             <x-authentication-card-logo />
+  6          </x-slot>
+
+resources\views\auth\reset-password.blade.php:
+  2      <x-authentication-card>
+  3:         <x-slot name="logo">
+  4:             <x-authentication-card-logo />
+  5          </x-slot>
+
+resources\views\auth\two-factor-challenge.blade.php:
+  2      <x-authentication-card>
+  3:         <x-slot name="logo">
+  4:             <x-authentication-card-logo />
+  5          </x-slot>
+
+resources\views\auth\verify-email.blade.php:
+   2      <x-authentication-card>
+   3:         <x-slot name="logo">
+   4:             <x-authentication-card-logo />
+   5          </x-slot>
+
+  34  
+  35:                 <form method="POST" action="{{ route('logout') }}" class="inline">
+  36                      @csrf
+
+resources\views\components\authentication-card.blade.php:
+  2      <div>
+  3:         {{ $logo }}
+  4      </div>
+
+resources\views\components\welcome.blade.php:
+  1  <div class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
+  2:     <x-application-logo class="block h-12 w-auto" />
+  3  
+
+resources\views\livewire\post-question.blade.php:
+  1  <x-authentication-card>
+  2:     <x-slot name="logo">
+  3  
+
+resources\views\profile\logout-other-browser-sessions-form.blade.php:
+  54          <div class="flex items-center mt-5">
+  55:             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
+  56                  {{ __('Log Out Other Browser Sessions') }}
+
+  64          <!-- Log Out Other Devices Confirmation Modal -->
+  65:         <x-dialog-modal wire:model="confirmingLogout">
+  66              <x-slot name="title">
+
+  72  
+  73:                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
+  74                      <x-input type="password" class="mt-1 block w-3/4"
+
+  78                                  wire:model.defer="password"
+  79:                                 wire:keydown.enter="logoutOtherBrowserSessions" />
+  80  
+
+  85              <x-slot name="footer">
+  86:                 <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
+  87                      {{ __('Cancel') }}
+
+  90                  <x-button class="ml-3"
+  91:                             wire:click="logoutOtherBrowserSessions"
+  92                              wire:loading.attr="disabled">
+
+resources\views\profile\show.blade.php:
+  32              <div class="mt-10 sm:mt-0">
+  33:                 @livewire('profile.logout-other-browser-sessions-form')
+  34              </div>
+
+tests\Feature\BrowserSessionsTest.php:
+   6  use Illuminate\Foundation\Testing\RefreshDatabase;
+   7: use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
+   8  use Livewire\Livewire;
+
+  18  
+  19:         Livewire::test(LogoutOtherBrowserSessionsForm::class)
+  20              ->set('password', 'password')
+  21:             ->call('logoutOtherBrowserSessions')
+  22              ->assertSuccessful();
+
+Untitled-1:
+  123          <a href="#" class="flex items-center space-x-2">
+  124:           <img class="h-12 w-12" src="images/app-logo.svg" alt="logo" />
+  125            <p
+
+  154                class="mx-auto h-16 w-16 lg:hidden"
+  155:               src="logo.png"
+  156:               alt="logo"
+  157              />
+
+  176                  src="images/google.png"
+  177:                 alt="logo"
+  178                />
+
+  186                  src="images/github.png"
+  187:                 alt="logo"
+  188                />
