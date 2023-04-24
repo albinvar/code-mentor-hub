@@ -93,8 +93,7 @@ class PaymentController extends Controller
 
         if ($success === true)
         {
-            $html = "<p>Your payment was successful</p>
-             <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
+            return view('success', compact('attributes'));
         }
         else
         {
