@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,7 @@ Route::middleware([
     Route::get('/profiles/{user:username}', function (User $user) {
         return view('profile-page', compact('user'));
     })->name('profile');
+
+    Route::get('/payment', [PaymentController::class, 'show'])->name('payment');
+    Route::post('/payment', [PaymentController::class, 'verify'])->name('payment.post');
 });
