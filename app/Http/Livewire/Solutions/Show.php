@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Solutions;
 
+use App\Models\Vote;
 use Livewire\Component;
 
 class Show extends Component
