@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,4 +43,8 @@ Route::middleware([
     Route::get('/questions/{question:slug}', function (Question $question) {
         return view('questions.show', compact('question'));
     })->name('question.show');
+
+    Route::get('/profiles/{user:username}', function (User $user) {
+        return view('profile-page', compact('user'));
+    })->name('profile');
 });
