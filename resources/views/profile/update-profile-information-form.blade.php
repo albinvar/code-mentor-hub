@@ -65,12 +65,47 @@
             <x-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
 
+            <div class="mt-4" x-data="{ tags: [], newTag: '' }" x-init="() => {
+                @if (old('tags'))
+                    tags.push(...JSON.parse('{{ json_encode(old("tags")) }}'))
+                @endif
+            }">
+                <x-label for="tags" value="{{ __('Your Interests') }}" />
+                <div class="my-3 flex flex-wrap items-center gap-2" x-cloak>
+                    <template x-for="(tag, index) in tags" :key="index">
+                        <div class="px-2 py-1 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-gray-500 transition-opacity duration-900 opacity-100 hover:opacity-75">
+                            <span x-text="tag"></span>
+                            <button type="button" class="ml-2 text-red-500 hover:text-red-700 focus:outline-none" @click.prevent="tags.splice(index, 1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M11.414 10l4.293-4.293a1 1 0 10-1.414-1.414L10 8.586 5.707 4.293a1 1 0 10-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 001.414 1.414L10 11.414l4.293 4.293a1 1 0 001.414-1.414L11.414 10z"
+                                          clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+
+                    <input type="text" id="tags" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" x-model="newTag" x-on:keydown.enter.prevent="
+            if (newTag.trim()) {
+                let tagsToAdd = newTag.split(/[ ,]+/);
+                tagsToAdd.forEach(tag => {
+                    if (tag.trim() && !tags.includes(tag.trim())) {
+                        tags.push(tag.trim());
+                    }
+                });
+                newTag = '';
+            }" placeholder="Add tags (comma, space, or enter separated)">
+                </div>
+                <input type="hidden" name="tags" :value="JSON.stringify(tags)">
+                <x-input-error for="email" class="mt-2" />
+            </div>
+
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
                 <p class="text-sm mt-2 dark:text-white">
                     {{ __('Your email address is unverified.') }}
 
                     <button type="button" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('Click here to re-send the verification em                                                                                                                                                                                         a                              il.') }}
                     </button>
                 </p>
 
