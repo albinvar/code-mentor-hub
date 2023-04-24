@@ -25,10 +25,12 @@ class Show extends Component
             ->where('solution_id', $solution->id)
             ->first();
 
-        if ($vote) {
+        if ($vote && $vote->vote_type == -1) {
             // If the user has already voted, update the existing vote
             $vote->vote_type = 1;
             $vote->save();
+        }elseif ($vote){
+            $vote->delete();
         } else {
             // If the user hasn't voted, create a new vote
             Vote::create([
@@ -50,10 +52,12 @@ class Show extends Component
             ->where('solution_id', $this->solution->id)
             ->first();
 
-        if ($vote) {
+        if ($vote && $vote->vote_type == 1) {
             // If the user has already voted, update the existing vote
             $vote->vote_type = -1;
             $vote->save();
+        }elseif ($vote){
+            $vote->delete();
         } else {
             // If the user hasn't voted, create a new vote
             Vote::create([
@@ -65,8 +69,6 @@ class Show extends Component
 
         // Refresh the component to update the vote count
         $this->emit('solutionVoted');
-
-
     }
 
     public function render()

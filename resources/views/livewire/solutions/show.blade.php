@@ -22,11 +22,11 @@
                 <div class="mt-4 flex justify-end items-center">
                     <button class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none" wire:click="upvote({{ $solution->id }})">
                         <i class="fas fa-thumbs-up"></i>
-                        <span class="ml-2">{{ "34" }}</span>
+                        <span class="ml-2">{{ $solution->upvotes }}</span>
                     </button>
-                    <button class="ml-4 px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none">
+                    <button class="ml-4 px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none" wire:click="downvote({{ $solution->id }})">
                         <i class="fas fa-thumbs-down"></i>
-                        <span class="ml-2">{{ "32" }}</span>
+                        <span class="ml-2">{{ $solution->downvotes }}</span>
                     </button>
                 </div>
             </div>

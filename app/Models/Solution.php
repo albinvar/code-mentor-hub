@@ -32,13 +32,13 @@ class Solution extends Model
         return $this->hasMany(Vote::class);
     }
 
-    public function getUpVotesAttribute(): HasMany
+    public function getUpVotesAttribute(): int
     {
-        return $this->votes()->where('voting_type', 1);
+        return $this->votes()->where('vote_type', 1)->count();
     }
 
-    public function getDownVotesAttribute(): HasMany
+    public function getDownVotesAttribute(): int
     {
-        return $this->votes()->where('voting_type', 0);
+        return $this->votes()->where('vote_type', -1)->count();
     }
 }
