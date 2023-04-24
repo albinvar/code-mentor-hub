@@ -11,9 +11,16 @@ class Show extends Component
 
     public $solutions = [];
 
+    public $sortOption = 'upvotes';
+
     public function mount($solutions)
     {
         $this->solutions = $solutions;
+        $this->sortOptions = [
+            'latest' => 'Latest',
+            'upvotes' => 'Most Upvoted',
+            'oldest' => 'Oldest',
+        ];
     }
 
     public function upvote(Solution $solution)
@@ -73,6 +80,13 @@ class Show extends Component
 
     public function render()
     {
+        if ($this->sortOption === 'latest') {
+            $this->solutions = Solution::latest()->get();
+        } elseif ($this->sortOption === 'upvotes') {
+            $this->solutions = Solution::withCount('votes')->orderByDesc('votes_count')->get();
+        } elseif ($this->sortOption === 'oldest') {
+            $this->solutions = Solution::oldest()->get();
+        }
         return view('livewire.solutions.show');
     }
 }
