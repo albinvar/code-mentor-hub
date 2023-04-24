@@ -93,6 +93,7 @@ class PaymentController extends Controller
 
         if ($success === true)
         {
+            auth()->user()->assignRole('Premium');
             return view('success', compact('attributes'));
         }
         else

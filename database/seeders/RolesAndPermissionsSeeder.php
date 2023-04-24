@@ -24,12 +24,19 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'promote-to-mentor']);
         Permission::create(['name' => 'demote-to-mentor']);
 
+        Permission::create(['name' => 'is-upgraded']);
+
         $userRole = Role::create(['name' => 'User']);
+        $premiumRole = Role::create(['name' => 'Premium']);
         $mentorRole = Role::create(['name' => 'Mentor']);
         $adminRole = Role::create(['name' => 'Admin']);
 
         $userRole->givePermissionTo([
             //
+        ]);
+
+        $userRole->givePermissionTo([
+            'is-upgraded'
         ]);
 
         $mentorRole->givePermissionTo([
