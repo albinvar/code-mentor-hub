@@ -92,9 +92,10 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4">
+                <a href="welcome.blade.php"><button class="ml-4">
                     {{ __('Register') }}
-                </x-button>
+                </button>
+                </a>
             </div>
         </form>
     </x-authentication-card>
