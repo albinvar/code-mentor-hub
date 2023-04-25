@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="flex py-16 justify-end w-1/2 px-4 h-fit">
-        <img class="rounded-full" src="https://raw.githubusercontent.com/albinvar/code-mentor-hub/c56d5ff1478adcfee0c55b4808704b8d567987bd/public/images/student.webp?token=GHSAT0AAAAAAB7UHVCIHO545DDHVA6OAANIZCHKWFA" class="w-fit" >
+        <img class="rounded-full" src="https://i.ibb.co/8g9Bp06/student.webp" class="w-fit" >
     </div>
 </main>
 </body>
