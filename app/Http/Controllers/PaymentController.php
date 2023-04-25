@@ -36,14 +36,14 @@ class PaymentController extends Controller
             "amount"            => $amount,
             "name"              => "Dev Connect",
             "description"       => "A platform for beginners in programming...",
-            "image"             => "https://s29.postimg.org/r6dj1g85z/daft_punk.jpg",
+            "image"             => "https://raw.githubusercontent.com/albinvar/code-mentor-hub/c56d5ff1478adcfee0c55b4808704b8d567987bd/public/images/logo.png?token=GHSAT0AAAAAAB7UHVCIRYDUSE6FTH4PTTSEZCHKU6Q",
             "prefill"           => [
-                "name"              => "{{ auth()->user()->name }}",
-                "email"             => "{{ auth()->user()->email }}",
+                "name"              => auth()->user()->name,
+                "email"             => auth()->user()->email,
                 "contact"           => "9876543219",
             ],
             "notes"             => [
-                "address"           => "{{ auth()->user()->profile->location }}",
+                "address"           => auth()->user()->profile->location,
                 "merchant_order_id" => "12312321",
             ],
             "theme"             => [
