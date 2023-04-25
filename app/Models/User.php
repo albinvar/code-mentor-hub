@@ -82,4 +82,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Vote::class);
     }
+
+    public function userSessions(): HasMany
+    {
+        return $this->hasMany(OneToOneSession::class, 'user_id');
+    }
+
+    public function mentorSessions(): HasMany
+    {
+        return $this->hasMany(OneToOneSession::class, 'mentor_id');
+    }
 }

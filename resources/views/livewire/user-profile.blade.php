@@ -26,6 +26,18 @@
                         @endif
                         <p class="text-gray-700">{{ '@'.$user->username }}</p>
                         <p class="text-gray-700">{{ $user->profile->location }}</p>
+                        @if(auth()->id() != $user->id && $user->hasRole('Mentor'))
+                            @if($this->getStatusOfRequest($user) == 0)
+                                <button  class="mt-10 block w-full rounded-md bg-orange-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
+                                    Pending
+                                </button>
+                            @elseif($this->getStatusOfRequest($user) == 9)
+                                <button wire:click="requestMentor({{ $user->id }})" class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    Connect
+                                </button>
+                            @endif
+
+                        @endif
                     </div>
                 </div>
 
