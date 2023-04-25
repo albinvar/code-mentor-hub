@@ -18,7 +18,7 @@ class PaymentController extends Controller
 
         $orderData = [
             'receipt'         => 3456,
-            'amount'          => 2000 * 100, // 2000 rupees in paise
+            'amount'          => 1999 * 100, // 1999 rupees in paise
             'currency'        => 'INR',
             'payment_capture' => 1 // auto capture
         ];
@@ -40,7 +40,7 @@ class PaymentController extends Controller
             "prefill"           => [
                 "name"              => "{{ auth()->user()->name }}",
                 "email"             => "{{ auth()->user()->email }}",
-                "contact"           => "9999999999",
+                "contact"           => "9876543219",
             ],
             "notes"             => [
                 "address"           => "{{ auth()->user()->profile->location }}",
