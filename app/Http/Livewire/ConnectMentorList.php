@@ -16,13 +16,19 @@ class ConnectMentorList extends Component
         $currentUserTags = auth()->user()->profile->tags()->pluck('name');
 
         // get matching questions from the db with all tags matching the profile.
-        $matchingMentors = Profile::role('Mentor')->withAllTags($currentUserTags)->latest()->get();
+        $matchingMentors = Profile::whereHas('user', function ($query) {
+            $query->role('Mentor');
+        })->withAllTags($currentUserTags)->latest()->get();
 
         // get partially matching results wth any tags matching the profile.
-        $partiallyMatchingMentors = Profile::role('Mentor')->withAnyTags($currentUserTags)->latest()->get();
+        $partiallyMatchingMentors = Profile::whereHas('user', function ($query) {
+            $query->role('Mentor');
+        })->withAnyTags($currentUserTags)->latest()->get();
 
         // Problems without any matching profiles.
-        $nonMatchingMentors = Profile::role('Mentor')->latest()->get();
+        $nonMatchingMentors = Profile::whereHas('user', function ($query) {
+            $query->role('Mentor');
+        })->latest()->get();
 
         $mergedMentors = $matchingMentors->merge($partiallyMatchingMentors);
         $mergedMentors = $mergedMentors->merge($nonMatchingMentors);

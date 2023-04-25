@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-            <livewire:user-profile />
+            <livewire:user-profile :user="$user"/>
         </div>
     </div>
 </x-app-layout>

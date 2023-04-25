@@ -14,32 +14,32 @@
                     <!-- Profile image -->
                     <div class="mb-4 sm:mb-0 sm:mr-4 flex-shrink-0">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <img class="mx-auto h-24 w-24 rounded-full object-cover" src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" />
+                            <img class="mx-auto h-24 w-24 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
                         @endif
                         </div>
 
                     <!-- Profile information -->
                     <div>
                         <h2 class="text-xl font-bold leading-tight text-gray-900"></h2>
-                        @if(auth()->user()->hasRole('Mentor'))
+                        @if($user->hasRole('Mentor'))
                             <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Mentor</span>
                         @endif
-                        <p class="text-gray-700">{{ '@'.auth()->user()->username }}</p>
-                        <p class="text-gray-700">{{ auth()->user()->profile->location }}</p>
+                        <p class="text-gray-700">{{ '@'.$user->username }}</p>
+                        <p class="text-gray-700">{{ $user->profile->location }}</p>
                     </div>
                 </div>
 
                 <!-- Profile bio -->
                 <div class="mt-6">
                     <h3 class="text-lg font-bold leading-tight text-gray-900 mb-2">Bio</h3>
-                    <p class="text-gray-700">{{ auth()->user()->profile->bio }}</p>
+                    <p class="text-gray-700">{{ $user->profile->bio }}</p>
                 </div>
 
                 <!-- Profile stats -->
                 <div class="mt-6 border-t border-gray-300 pt-6 flex justify-between">
                     <div class="flex flex-col items-center">
-                        <span class="text-lg font-bold text-gray-900">@if(auth()->user()->hasRole('Mentor')) {{ auth()->user()->solutions()->count() }} @else {{ auth()->user()->questions()->count() }}  @endif</span>
-                        <span class="text-sm text-gray-700">@if(auth()->user()->hasRole('Mentor')) Problems Solved @else Problems Created @endif</span>
+                        <span class="text-lg font-bold text-gray-900">@if($user->hasRole('Mentor')) {{ $user->solutions()->count() }} @else {{ $user->questions()->count() }}  @endif</span>
+                        <span class="text-sm text-gray-700">@if($user->hasRole('Mentor')) Problems Solved @else Problems Created @endif</span>
                     </div>
                     <div class="flex flex-col items-center">
                         <span class="text-lg font-bold text-gray-900">85</span>
