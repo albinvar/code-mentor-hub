@@ -1,6 +1,12 @@
 # Code Mentor Hub
 Code Mentor Hub is a platform where developers can share their programming experiences and help newcomers learn and grow. It features mentoring, learning paths, progress tracking, and community-driven content creation.
 
+Developers
+@albinvar
+@AKomplished-bug
+@sidharthgk
+@Rahulcodes109
+
 ## Getting Started
 To get started with CodeMentorHub, follow these steps:
 
