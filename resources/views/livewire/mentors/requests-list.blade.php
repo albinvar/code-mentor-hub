@@ -61,7 +61,8 @@
                     @if($req->status == 2)
                         <span class="ml-4 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300" >Currently Rejected</span>
                     @elseif($req->status == 1)
-                        <span class="ml-4 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300" >Currently Approved</span>
+                        <span class="ml-4 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300" >Currently Approved, Google Meet Link Generated</span>
+                        <a href="{{ $req->url }}" class="mt-4 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open Google meet</a>
                     @elseif($req->status == 0)
                         <span class="ml-4 bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300" >Pending</span>
                     @endif
