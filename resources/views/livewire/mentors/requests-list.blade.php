@@ -14,7 +14,7 @@
                 Name
             </th>
             <th scope="col" class="px-6 py-3">
-                Expertises
+                Intrests
             </th>
             <th scope="col" class="px-6 py-3">
                 Status
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
 
-        @foreach($mentors as $profile)
+        @foreach($requests as $req)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
@@ -36,17 +36,18 @@
                 </td>
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                        <img class="h-10 w-10 rounded-full object-cover mr-2" src="{{ $profile->user->profile_photo_url }}" alt="{{ $profile->user->name }}" />
+                        <img class="h-10 w-10 rounded-full object-cover mr-2" src="{{ $req->user->profile_photo_url }}" alt="{{ $req->user->name }}" />
                     @endif
                     <div class="pl-3">
-                        <div class="text-base font-semibold">{{ $profile->user->name }}</div>
-                        <div class="font-normal text-gray-500">{{ $profile->user->email }}</div>
+                        <div class="text-base font-semibold">{{ $req->user->name }}</div>
+                        <div class="font-normal text-gray-500">{{ $req->user->email }}</div>
                     </div>
                 </th>
                 <td class="px-6 py-4">
-                    @foreach($profile->tags->pluck('name') as $tag)
+                    @forelse($req->user->profile->tags->pluck('name') as $tag)
                         <span class="inline-flex items-center rounded-md bg-blue-100 dark:bg-blue-200 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"> {{ $tag }}</span>
-                    @endforeach
+                    @empty
+                    @endforelse
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center">
@@ -54,7 +55,17 @@
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" wire:click="connectMentor({{ $profile->user->id }})">Connect</a>
+                    <a href="#" wire:click="approve({{ $req->id }})" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" >Approve</a>
+                    <a href="#" wire:click="reject({{ $req->id }})" class="ml-4 font-medium text-red-600 dark:text-red-500 hover:underline" >Reject</a>
+
+                    @if($req->status == 2)
+                        <span class="ml-4 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300" >Currently Rejected</span>
+                    @elseif($req->status == 1)
+                        <span class="ml-4 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300" >Currently Approved</span>
+                    @elseif($req->status == 0)
+                        <span class="ml-4 bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300" >Pending</span>
+                    @endif
+
                 </td>
             </tr>
         @endforeach

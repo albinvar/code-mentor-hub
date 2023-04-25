@@ -50,4 +50,8 @@ Route::middleware([
     Route::post('/payment', [PaymentController::class, 'verify'])->name('payment.post');
 
     Route::get('/connect-with-mentors', [OneToOneSessionController::class, 'index'])->name('connect.mentor');
+
+    Route::get('/user-requests', function () {
+        return view('mentors.requests');
+    })->name('mentor.requests');
 });
